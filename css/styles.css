@@ -1,0 +1,99 @@
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+header{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    height: 80px;
+    background-color: azure;
+    font-weight: bold;
+}
+
+#search-area *{
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    height:25px;
+    font-size: 18px;
+    border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+}
+#search-area{
+    display: flex;
+    flex-direction: column;
+    grid-area: searchView;
+    height: 400px;
+    padding:20px;
+    
+}
+#query{
+    width: calc(100% - 8px);
+    height: 30px;
+    border: 1px solid lightgray;
+}
+button{
+    border: 1px solid lightgray;
+    cursor: pointer;
+}
+form{
+    height: fit-content !important;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 10px;
+}
+#weather-view{
+    grid-area: weatherView;
+    padding:20px;
+    max-height: 300px;
+    
+}
+#weather-forcast{
+    grid-area:forcastView;
+    display: flex;
+    padding-left:20px;
+    padding-bottom: 20px;
+    max-height: 200px;
+}
+#forcast-title{
+    grid-area:forcastTitle;
+    padding-left:20px;
+    font-weight: bold;
+}
+main{
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 300px calc(100% - 300px);
+    grid-template-rows: 300px 30px 200px;
+    grid-template-areas: 
+    "searchView weatherView"
+    "searchView forcastTitle"
+    "searchView forcastView";
+    min-width: 1200px;
+    max-width: 1200px;
+}
+.main-data{
+    border: 1px solid lightgray;
+    height: 100%;
+    border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+}
+.forcast-data{
+    border: 1px solid lightgray;
+    height: 100%;
+    width: 20%;
+    margin-right: 20px;
+    border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+}
+
