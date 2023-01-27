@@ -13,8 +13,8 @@ function getCityCoords(city) {
 //function to get weather data from coordinates
 function getWeather(coords) {
     let baseURL = "https://api.openweathermap.org/data/2.5/forecast?"
-    let lat = "lat=" + coords[0].lat;
-    let lon = '&lon=' + coords[0].lon;
+    let lat = "lat=" + coords.lat;
+    let lon = '&lon=' + coords.lon;
     let units = '&units=metric'
 
     let queryURL = baseURL + lat + lon + key + units ;
@@ -23,10 +23,38 @@ function getWeather(coords) {
 }
 
 //function to add data to page
-function popPage(data){
+function popWeatherResult(data, target, className){
     console.log(data);
 
-    //city name / date / temp / wind / humidity
+    let iconDataLocation = data.list[0].weather[0];
+    let weatherDataLocation = data.list[0];
+    //get city name and date
+    let city = data.city.name
+    let date = weatherDataLocation.dt_txt;
+    //get icon image and alt
+    let iconcode = iconDataLocation.icon;
+    let alt = iconDataLocation.main;
+    let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    //get weather data
+    let temp = weatherDataLocation.main.temp;
+    let wind = weatherDataLocation.wind.speed;
+    let humidity = weatherDataLocation.main.humidity;
+
+    var weatherElement = $('<div>');
+    weatherElement.attr('class', className);
+    var heading = '';
+    if(className == 'main-data'){
+        heading = `<h2 class="city">${city}<span> ${moment(date).format('MMMM Do YYYY')}</span><img src="${iconurl}"  alt="${alt}"></h2>`
+    } else {
+        heading = `<div class="date">21.01.2023 </div>`
+    }
+    weatherElement.html(`
+        ${heading}
+        <div class="temp">Temp: ${temp}</div>
+        <div class="wind">Wind: ${wind}</div>
+        <div class="humidity">Humidity: ${humidity}</div>
+    `);
+    target.append(weatherElement);
 }
 
 //function to call ajax request
@@ -36,9 +64,12 @@ function getData(queryURL, type) {
         method: "GET"
     }).then(function (response) {
         if (type == 'coords') {
-            getWeather(response);
+            getWeather(response[0]);
+
         } else if (type == 'weather')  {
-            popPage(response);
+            let target = $('#weather-view');
+            let className = 'main-data';
+            popWeatherResult(response, target,className );
         }
 
     });
