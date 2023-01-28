@@ -128,12 +128,93 @@ function saveData() {
 
 }
 
+//function to save calender event
+function saveToLocalStorage(city) {
+
+    //check if data in local storage and return it if so
+    var data = checkLocalStorage();
+    //if data exists, push new item
+    console.log(data)
+    if (data != false) {
+        //check ifsearch already in history
+        if(!data.includes(city)){
+            data.push(city);
+            addHistory(city);
+        } else {
+            return;
+        }
+    } else {
+        //if no data create new array
+        data = [city];
+        addHistory(city);
+    }
+    //save to local storage
+    localStorage.setItem('search', JSON.stringify(data));
+
+}
+//function to check local storage data
+function checkLocalStorage() {
+    //check if calender data available for current day
+    let data = JSON.parse(localStorage.getItem('search'));
+        //if data available add to array and return
+        if (data != null) {
+            let search = [];
+            for (i = 0; i < data.length; i++){
+                search.push(data[i]);
+            };
+            return search;
+        } else {
+            //if no data in local storage
+            return false;
+        }
+}
+//function to populate text fields from storage
+function populateFromLocalStorage(data) {
+    
+    if(data!= null){
+        for (i = 0; i < data.length; i++) {
+            let newBtn = `<button type="submit" class="clickEvent" data-city="${data[i]}">${data[i]}</button>`
+            $('#search-history').append(newBtn);
+        };
+
+    }
+
+}
+//function to add history button on new search query
+function addHistory(city){
+    let newBtn = `<button type="submit" class="clickEvent" data-city="${city}">${city}</button>`
+    $('#search-history').append(newBtn);
+
+}
+//function to initiate page on load
+function init(){
+    data = checkLocalStorage();
+    if (data != null) {
+        populateFromLocalStorage(data);
+    } 
+}
+
+
+
 //click listener for search button
 $("#search").on("click", function (event) {
     event.preventDefault();
-    getCityCoords($('#query').val());
+
+    let city = $('#query').val();
+    getCityCoords(city);
+    saveToLocalStorage(city);
+    
+
+});
+$("#search-history").on("click", function (event) {
+    event.preventDefault();
+    if (event.target.classList.contains('clickEvent')) {
+        let city = $( event.target ).data('city');
+        getCityCoords(city);
+    }
+    
 
 });
 
-
+init();
 
