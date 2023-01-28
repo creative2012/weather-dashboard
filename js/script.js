@@ -1,6 +1,7 @@
 const key = "&appid=df399c578ec151e1ad2bd5287c70f3b8";
 const today = $('#weather-view');
 const forcast = $('#weather-forcast');
+
 //function to get city coordinates from city name
 function getCityCoords(city) {
     let baseURL = "http://api.openweathermap.org/geo/1.0/direct?"
@@ -12,7 +13,7 @@ function getCityCoords(city) {
 }
 
 //function to get weather data from coordinates
-function getWeather(coords){
+function getWeather(coords) {
     current = true;
     let baseURL = "https://api.openweathermap.org/data/2.5/weather?"
     let lat = "lat=" + coords.lat;
@@ -25,35 +26,36 @@ function getWeather(coords){
     baseURL = "https://api.openweathermap.org/data/2.5/forecast?"
     queryURL = baseURL + lat + lon + key + units;
     getData(queryURL, 'forcast');
-    
+
 
 }
 
 //function to add data to page
-function popWeatherResult(dataSet,type) {
-    if(type == 'current'){
+function popWeatherResult(dataSet, type) {
+    if (type == 'current') {
         //clear results
         today.html('');
+        //populate page
         populatePage(dataSet, type, null);
     } else {
-        console.log(dataSet)
         //clear results
         forcast.html('');
-        for (i = 0; i < 40; i = i+ 8) {
+        for (i = 0; i < 40; i = i + 8) {
+            //populate page
             populatePage(dataSet, type, i)
         };
     }
-    
+
 }
 
-function populatePage(dataSet, type, i){
-    
+function populatePage(dataSet, type, i) {
+
     var data;
     var heading;
     var target;
     var className;
-
-    if(type == 'current') {
+    //check if current weather or forcast
+    if (type == 'current') {
         var city = dataSet.name;
         target = today;
         className = 'main-data';
@@ -64,7 +66,6 @@ function populatePage(dataSet, type, i){
         target = forcast;
         className = 'forcast-data';
     }
-
     let iconDataLocation = data.weather[0];
     //get icon image and alt
     let iconcode = iconDataLocation.icon;
@@ -74,7 +75,8 @@ function populatePage(dataSet, type, i){
     let temp = data.main.temp;
     let wind = data.wind.speed;
     let humidity = data.main.humidity;
-    if(type == 'current') {
+    //check if current weather or forcast
+    if (type == 'current') {
         heading = `<h2 class="city">${city}<span> ${moment().format('MMMM Do YYYY')}</span><img src="${iconurl}"  alt="${alt}"></h2>`;
     } else {
         heading = `<div class="date">${moment(date).format('l')} </br> <img src="${iconurl}"  alt="${alt}"></div>`;
@@ -90,7 +92,6 @@ function populatePage(dataSet, type, i){
     `);
     //add to page
     target.append(weatherElement);
-    
 
 }
 
@@ -104,11 +105,9 @@ function getData(queryURL, type) {
             getWeather(response[0]);
 
         } else {
-           
             popWeatherResult(response, type);
 
-        } 
-
+        }
     });
 
 }
