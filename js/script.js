@@ -31,28 +31,28 @@ function getWeather(coords) {
 
 //function to add data to page
 function popWeatherResult(dataSet, type) {
-    $('#forcast-title').fadeTo( 1000 , 1);
+    $('#forcast-title').fadeTo(1000, 1);
     if (type == 'current') {
         //clear results
         today.html('');
         //populate page
         var fade = populatePage(dataSet, type, null);
-        fade.fadeTo( 1000 , 1);
+        fade.fadeTo(1000, 1);
     } else {
         //clear results
         forcast.html('');
         for (i = 8; i < 40; i = i + 8) {
             //populate page
-            if(i == 8){
-                var fade =populatePage(dataSet, type, i);
-                i++;
-            } else if(i == 33){
+            if (i == 8) {
                 var fade = populatePage(dataSet, type, i);
-                i = i -2;
+                i++;
+            } else if (i == 33) {
+                var fade = populatePage(dataSet, type, i);
+                i = i - 2;
             } else {
                 var fade = populatePage(dataSet, type, i);
             }
-            fade.fadeTo( 1000 , 1);
+            fade.fadeTo(1000, 1);
         };
     }
 
@@ -136,7 +136,7 @@ function saveToLocalStorage(city) {
     //if data exists, push new item
     if (data != false) {
         //check ifsearch already in history
-        if(!data.includes(city)){
+        if (!data.includes(city)) {
             data.push(city);
             addHistory(city);
         } else {
@@ -155,22 +155,22 @@ function saveToLocalStorage(city) {
 function checkLocalStorage() {
     //check if calender data available for current day
     let data = JSON.parse(localStorage.getItem('search'));
-        //if data available add to array and return
-        if (data != null) {
-            let search = [];
-            for (i = 0; i < data.length; i++){
-                search.push(data[i]);
-            };
-            return search;
-        } else {
-            //if no data in local storage
-            return false;
-        }
+    //if data available add to array and return
+    if (data != null) {
+        let search = [];
+        for (i = 0; i < data.length; i++) {
+            search.push(data[i]);
+        };
+        return search;
+    } else {
+        //if no data in local storage
+        return false;
+    }
 }
 //function to populate text fields from storage
 function populateFromLocalStorage(data) {
-    
-    if(data!= null){
+
+    if (data != null) {
         for (i = 0; i < data.length; i++) {
             let newBtn = `<button type="submit" class="clickEvent" data-city="${data[i]}">${data[i]}</button>`
             $('#search-history').append(newBtn);
@@ -180,17 +180,17 @@ function populateFromLocalStorage(data) {
 
 }
 //function to add history button on new search query
-function addHistory(city){
+function addHistory(city) {
     let newBtn = `<button type="submit" class="clickEvent" data-city="${city}">${city}</button>`
     $('#search-history').append(newBtn);
 
 }
 //function to initiate page on load
-function init(){
+function init() {
     data = checkLocalStorage();
     if (data != null) {
         populateFromLocalStorage(data);
-    } 
+    }
 }
 
 
@@ -199,22 +199,22 @@ function init(){
 $("#search").on("click", function (event) {
     event.preventDefault();
     let city = $('#query').val();
-    if(city != ''){
+    if (city != '') {
         getCityCoords(city);
         saveToLocalStorage(city);
     }
-    
+
     $('#query').val('');
-    
+
 
 });
 $("#search-history").on("click", function (event) {
     event.preventDefault();
     if (event.target.classList.contains('clickEvent')) {
-        let city = $( event.target ).data('city');
+        let city = $(event.target).data('city');
         getCityCoords(city);
     }
-    
+
 
 });
 
