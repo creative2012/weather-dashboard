@@ -134,7 +134,6 @@ function saveToLocalStorage(city) {
     //check if data in local storage and return it if so
     var data = checkLocalStorage();
     //if data exists, push new item
-    console.log(data)
     if (data != false) {
         //check ifsearch already in history
         if(!data.includes(city)){
@@ -199,10 +198,13 @@ function init(){
 //click listener for search button
 $("#search").on("click", function (event) {
     event.preventDefault();
-
     let city = $('#query').val();
-    getCityCoords(city);
-    saveToLocalStorage(city);
+    if(city != ''){
+        getCityCoords(city);
+        saveToLocalStorage(city);
+    }
+    
+    $('#query').val('');
     
 
 });
