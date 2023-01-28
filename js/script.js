@@ -31,26 +31,28 @@ function getWeather(coords) {
 
 //function to add data to page
 function popWeatherResult(dataSet, type) {
-    console.log(dataSet)
+    $('#forcast-title').fadeTo( 1000 , 1);
     if (type == 'current') {
         //clear results
         today.html('');
         //populate page
-        populatePage(dataSet, type, null);
+        var fade = populatePage(dataSet, type, null);
+        fade.fadeTo( 1000 , 1);
     } else {
         //clear results
         forcast.html('');
         for (i = 8; i < 40; i = i + 8) {
             //populate page
             if(i == 8){
-                populatePage(dataSet, type, i);
+                var fade =populatePage(dataSet, type, i);
                 i++;
             } else if(i == 33){
-                populatePage(dataSet, type, i);
+                var fade = populatePage(dataSet, type, i);
                 i = i -2;
             } else {
-                populatePage(dataSet, type, i);
+                var fade = populatePage(dataSet, type, i);
             }
+            fade.fadeTo( 1000 , 1);
         };
     }
 
@@ -75,10 +77,9 @@ function populatePage(dataSet, type, i) {
         target = forcast;
         className = 'forcast-data';
     }
-    let iconDataLocation = data.weather[0];
     //get icon image and alt
-    let iconcode = iconDataLocation.icon;
-    let alt = iconDataLocation.main;
+    let iconcode = data.weather[0].icon;
+    let alt = data.weather[0].main;
     let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
     //get weather data
     let temp = data.main.temp;
@@ -101,7 +102,7 @@ function populatePage(dataSet, type, i) {
     `);
     //add to page
     target.append(weatherElement);
-    
+    return weatherElement;
 
 }
 
