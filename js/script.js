@@ -167,7 +167,7 @@ function checkLocalStorage() {
         return false;
     }
 }
-//function to populate text fields from storage
+//function to populate buttons from storage
 function populateFromLocalStorage(data) {
 
     if (data != null) {
