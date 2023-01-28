@@ -8,8 +8,9 @@ header{
     justify-content: center;
     font-size: 2rem;
     height: 80px;
-    background-color: azure;
+    background-color:cornflowerblue;
     font-weight: bold;
+    color: white;
 }
 
 #search-area *{
@@ -98,6 +99,7 @@ main{
     -o-border-radius: 0.5rem;
     background-color: rgb(56, 56, 134);
     color: white;
+    
 }
 h2{
     display: flex;
