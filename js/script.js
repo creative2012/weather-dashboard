@@ -42,20 +42,20 @@ function popWeatherResult(dataSet, type) {
         //clear results
         forcast.html('');
         var fiveDay = 0;
-        const today = moment().add(1, 'days');
+        const day = moment().add(1, 'days');
         for (i = 0; i < 40; i++) {
             //populate page
             data = dataSet.list[i];
             let date = moment(data.dt_txt).format('ddd Do MMMM YYYY');
-            if(date == today.format('ddd Do MMMM YYYY')){
+            if (date == day.format('ddd Do MMMM YYYY')) {
                 let fade = populatePage(dataSet, type, i);
                 fade.fadeTo(1000, 1);
                 fiveDay++;
-                today.add(1, 'days');
+                day.add(1, 'days');
             }
         }
-        if(fiveDay != 5){
-            console.log('on no :'+fiveDay);
+        if (fiveDay != 5) {
+            console.log('on no :' + fiveDay);
         }
     }
 }
@@ -188,7 +188,7 @@ function addHistory(city) {
 }
 //function to initiate page on load
 function init() {
-    data = checkLocalStorage();
+    let data = checkLocalStorage();
     if (data != null) {
         populateFromLocalStorage(data);
     }
