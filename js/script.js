@@ -204,6 +204,7 @@ $("#search").on("click", function (event) {
 
 
 });
+//click listener for history buttons
 $("#search-history").on("click", function (event) {
     event.preventDefault();
     if (event.target.classList.contains('clickEvent')) {
