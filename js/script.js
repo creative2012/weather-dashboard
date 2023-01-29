@@ -41,23 +41,24 @@ function popWeatherResult(dataSet, type) {
     } else {
         //clear results
         forcast.html('');
-        for (i = 8; i < 40; i = i + 8) {
+        var fiveDay = 0;
+        const today = moment().add(1, 'days');
+        for (i = 0; i < 40; i++) {
             //populate page
-            if (i == 8) {
-                var fade = populatePage(dataSet, type, i);
-                i++;
-            } else if (i == 33) {
-                var fade = populatePage(dataSet, type, i);
-                i = i - 2;
-            } else {
-                var fade = populatePage(dataSet, type, i);
+            data = dataSet.list[i];
+            let date = moment(data.dt_txt).format('ddd Do MMMM YYYY');
+            if(date == today.format('ddd Do MMMM YYYY')){
+                let fade = populatePage(dataSet, type, i);
+                fade.fadeTo(1000, 1);
+                fiveDay++;
+                today.add(1, 'days');
             }
-            fade.fadeTo(1000, 1);
-        };
+        }
+        if(fiveDay != 5){
+            console.log('on no :'+fiveDay);
+        }
     }
-
 }
-
 //function to populate html
 function populatePage(dataSet, type, i) {
 
@@ -219,4 +220,3 @@ $("#search-history").on("click", function (event) {
 });
 
 init();
-
