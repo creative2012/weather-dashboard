@@ -124,11 +124,6 @@ function getData(queryURL, type) {
 
 }
 
-//function to save data
-function saveData() {
-
-}
-
 //function to save calender event
 function saveToLocalStorage(city) {
 
