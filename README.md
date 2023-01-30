@@ -6,7 +6,7 @@ A simple Weather app to see current and a 5 day forcast for the city of your cho
 
 ## Usage
 Simply enter the city of your choosing and click search to view the current and forcast weather.
-Each search you make will be saved and availble to click to view again,even after leaving and return to the app.
+Each search you make will be saved and availble to click to view again, even after leaving and returning to the app.
 
 The following image shows the web application's main interface:
 
