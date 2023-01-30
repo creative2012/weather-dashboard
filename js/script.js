@@ -81,7 +81,7 @@ function populatePage(dataSet, type, i) {
     //get icon image and alt
     let iconcode = data.weather[0].icon;
     let alt = data.weather[0].main;
-    let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    let iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
     //get weather data
     let temp = data.main.temp;
     let wind = data.wind.speed;
