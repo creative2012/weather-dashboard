@@ -4,7 +4,7 @@ const forcast = $('#weather-forcast');
 
 //function to get city coordinates from city name
 function getCityCoords(city) {
-    let baseURL = "http://api.openweathermap.org/geo/1.0/direct?"
+    let baseURL = "https://api.openweathermap.org/geo/1.0/direct?"
     let query = "q=" + city;
 
     let queryURL = baseURL + query + key;
