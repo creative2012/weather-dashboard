@@ -41,7 +41,6 @@ function popWeatherResult(dataSet, type) {
     } else {
         //clear results
         forcast.html('');
-        var fiveDay = 0;
         const day = moment().add(1, 'days');
         for (i = 0; i < 40; i++) {
             //populate page
@@ -50,12 +49,8 @@ function popWeatherResult(dataSet, type) {
             if (date == day.format('ddd Do MMMM YYYY')) {
                 let fade = populatePage(dataSet, type, i);
                 fade.fadeTo(1000, 1);
-                fiveDay++;
                 day.add(1, 'days');
             }
-        }
-        if (fiveDay != 5) {
-            console.log('on no :' + fiveDay);
         }
     }
 }
